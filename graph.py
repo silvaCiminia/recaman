@@ -19,7 +19,11 @@ def val_plot(data: [],
     f = interp1d(x, y, kind='cubic')
 
     curve = np.linspace(0, len(data)-1, num=res*len(data), endpoint=True)
-    plt.plot(x, y, 'o', curve, f(curve))
+    plt.plot(x, y, '.', curve, f(curve))
+
+    plt.yticks(range(0, 128)[::5])
+    plt.xticks(range(0, 128)[::5])
+    plt.xticks(rotation=90)
 
     return plt
 

@@ -18,6 +18,12 @@ def seq(length: int,
         else:
             # Otherwise, insert arr[i-1] + i
             higher_candidate = arr[i-1] + i
+
+            # If we have a non-zero base, it is possible to have no valid
+            # options for continuation. In this case, we end the sequence.
+            if origin != 0 and higher_candidate in arr:
+                return(arr[:i], largest)
+
             arr[i] = higher_candidate
 
             # Return the largest item to pass to plotting operations
