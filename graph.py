@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
+'''
+Graphing utilities
+'''
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import numpy as np
 from scipy.interpolate import interp1d
-import seq
 
 
 def val_plot(data: [],
@@ -22,9 +24,9 @@ def val_plot(data: [],
     return plt
 
 
-def line_plot(data: [],
-              max_: int,
-              ) -> plt:
+def circles(data: [],
+            max_: int,
+            ) -> plt:
     # Plot values as zeroes on numberline, drawing arcs between
     fg, ax = plt.subplots(1, 1)
 
@@ -36,7 +38,7 @@ def line_plot(data: [],
     _v0 = 180
     _v1 = 0
 
-    for i in range(0, len(data)-2):
+    for i in range(0, len(data)-1):
         # plot arcs between numbers
         p0 = data[i]
         p1 = data[i+1]
