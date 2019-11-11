@@ -24,5 +24,6 @@ As you can see again with origin 64:
 Interesting patterns emerge almost immediately! For instance, look at this plot of origin points to resulting sequence lengths for an (attempted) 128 member sequence:
 
 ![img3](img/lengths.png)
+Starting at x = 3, an interesting pattern emerges - triplets of the multiples of three, separated by a constantly incrementing number of values!
 
-Starting on
+For more information on the Recamán sequence, see https://oeis.org/wiki/Recam%C3%A1n%27s_sequence. This project only deals with type 1 sequences, though it could easily be adapted to the other types by changing the operations in the `seq()` method.
