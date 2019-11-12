@@ -8,6 +8,7 @@ from enum import Enum
 
 
 class Op(Enum):
+    # Sequence types
     SUB = 1
     DIV = 2
 
@@ -44,12 +45,19 @@ def seq(length: int,
 
 def get_op(op: Op):
     if Op(op) == Op.SUB:
-        print('s')
         return (lambda x, y: x - y,
                 lambda x, y: x + y)
 
     elif Op(op) == Op.DIV:
-        print('d')
         # Ensure that only factors of x are considered as candidates
         return (lambda x, y: (int)(x / y) if x % y == 0 else -1,
                 lambda x, y: x * y)
+
+k = 10
+
+for i in range(0,50):
+    a, l = seq(k, i, 1)
+    if len(a) == k:
+        print(str(i), ':)')
+        continue
+    #print(str(i), ': ', str(len(a)))
