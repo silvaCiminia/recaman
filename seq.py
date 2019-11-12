@@ -4,20 +4,29 @@
 Generate a recaman sequence.
 '''
 
+from enum import Enum
+
+
+class Op(Enum):
+    SUB = 1
+    DIV = 2
+
 
 def seq(length: int,
-        origin: int):
+        origin: int,
+        op: Op) -> ([], int):
     largest = origin
     arr = [origin] * length
+    (_dec_op, _inc_op) = get_op(op)
 
     for i in range(1, length):
-        lower_candidate = arr[i-1] - i
-        if lower_candidate >= 0 and lower_candidate not in arr:
+        lower_candidate = _dec_op(arr[i-1], i)
+        if lower_candidate >= 0 and (i == 1 or lower_candidate not in arr):
             # Insert arr[i-1] - i if not already in arr
             arr[i] = lower_candidate
         else:
             # Otherwise, insert arr[i-1] + i
-            higher_candidate = arr[i-1] + i
+            higher_candidate = _inc_op(arr[i-1], i)
 
             # If we have a non-zero base, it is possible to have no valid
             # options for continuation. In this case, we end the sequence.
@@ -31,3 +40,16 @@ def seq(length: int,
                 largest = higher_candidate
 
     return arr, largest
+
+
+def get_op(op: Op):
+    if Op(op) == Op.SUB:
+        print('s')
+        return (lambda x, y: x - y,
+                lambda x, y: x + y)
+
+    elif Op(op) == Op.DIV:
+        print('d')
+        # Ensure that only factors of x are considered as candidates
+        return (lambda x, y: (int)(x / y) if x % y == 0 else -1,
+                lambda x, y: x * y)
